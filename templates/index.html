@@ -11,12 +11,33 @@
         <button type="submit">Add</button>
     </form>
 
-    <h2>Todo List:</h2>
+    <h2>All Todos:</h2>
     <ul>
         {% for todo in todos %}
-            <li>{{ todo }}</li>
+            <li>
+                {% if todo.done %}
+                    <s>{{ todo.task }}</s> ✅
+                {% else %}
+                    {{ todo.task }}
+                    <form action="/todos/{{ todo.id }}/complete" method="post" style="display:inline;">
+                        <button type="submit">Mark Done</button>
+                    </form>
+                {% endif %}
+                <form action="/todos/{{ todo.id }}/delete" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
         {% else %}
             <li>No todos yet!</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Pending Todos:</h2>
+    <ul>
+        {% for todo in pending_todos %}
+            <li>{{ todo.task }}</li>
+        {% else %}
+            <li>All tasks are completed! </li>
         {% endfor %}
     </ul>
 </body>
