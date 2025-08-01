@@ -15,9 +15,9 @@ class Todo(BaseModel):
 todos: List[Todo] = []
 next_id = 1  # ใช้นับ id ของ Todo
 
-@app.get("/", response_class=HTMLResponse)
-def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "todos": todos})
+#@app.get("/", response_class=HTMLResponse)
+#def read_root(request: Request):
+#    return templates.TemplateResponse("index.html", {"request": request, "todos": todos})
 
 @app.post("/create-todo")
 def create_todo(item: str = Form(...)):
